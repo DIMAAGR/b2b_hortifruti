@@ -1,16 +1,17 @@
-# b2b_hortifruti
+**Notas:** Eu tinha ficado um pouco na duvida se usar o `ResponseData` no controlador usando ResponseData.failure(falha) ResponseData.success(data) se estaria correta, como mostra o exemplo abaixo:
 
-A new Flutter project.
+```dart
+  Future<void> getStoreData() async {
+    final result = await _getStoreDataUseCase();
 
-## Getting Started
+    storeData.value = result.fold(
+      (failure) => ResponseData.failure(failure.message),
+      (data) => ResponseData.success(data),
+    );
 
-This project is a starting point for a Flutter application.
+    notifyListeners();
+  }
+```
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+ E, depois de muito pesquisar, encontrei a seguinte: Na Clean Architecture, é importante manter a separação de responsabilidades clara e a conversão do resultado do use case para um formato específico para a camada de apresentação é de responsabilidade do controlador, não das classes de use case ou repository. Então eu acredito que a abordagem esteja correta, talvez não com o melhor nome para essa classe.
