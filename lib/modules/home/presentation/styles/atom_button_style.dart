@@ -5,9 +5,9 @@ import 'package:flutter/material.dart';
 class AtomButtonStyle {
   static ButtonStyle getWebButtonStyle() {
     return ButtonStyle(
-      foregroundColor: MaterialStateProperty.resolveWith<Color>(_foregroundColor),
-      backgroundColor: MaterialStateProperty.resolveWith<Color>(_backgroundColorWeb),
-      elevation: const MaterialStatePropertyAll<double>(0),
+      foregroundColor: WidgetStateProperty.resolveWith<Color>(_foregroundColor),
+      backgroundColor: WidgetStateProperty.resolveWith<Color>(_backgroundColorWeb),
+      elevation: const WidgetStatePropertyAll<double>(0),
       splashFactory: NoSplash.splashFactory,
       animationDuration: Duration.zero,
     );
@@ -15,26 +15,36 @@ class AtomButtonStyle {
 
   static ButtonStyle getMobileButtonStyle() {
     return ButtonStyle(
-      foregroundColor: MaterialStateProperty.resolveWith<Color>(_foregroundColor),
-      backgroundColor: MaterialStateProperty.resolveWith<Color>(_backgroundColorMobile),
-      elevation: const MaterialStatePropertyAll<double>(0),
-      shape: MaterialStateProperty.resolveWith<OutlinedBorder>(_shape),
-      minimumSize:  const MaterialStatePropertyAll(Size(80, !kIsWeb ? 32 : 48)),
+      foregroundColor: WidgetStateProperty.resolveWith<Color>(_foregroundColor),
+      backgroundColor: WidgetStateProperty.resolveWith<Color>(_backgroundColorMobile),
+      elevation: const WidgetStatePropertyAll<double>(0),
+      shape: WidgetStateProperty.resolveWith<OutlinedBorder>(_shape),
+      minimumSize: const WidgetStatePropertyAll(Size(80, !kIsWeb ? 32 : 48)),
       splashFactory: NoSplash.splashFactory,
       animationDuration: Duration.zero,
     );
   }
 
-  static Color _foregroundColor(Set<MaterialState> states) {
-    if (states.contains(MaterialState.pressed) || states.contains(MaterialState.disabled)) {
+  static ButtonStyle getOrangeButtonStyle() {
+    return const ButtonStyle(
+      foregroundColor: WidgetStatePropertyAll(Colors.white),
+      backgroundColor: WidgetStatePropertyAll(AppColors.orange),
+      elevation: WidgetStatePropertyAll<double>(0),
+      splashFactory: NoSplash.splashFactory,
+      animationDuration: Duration.zero,
+    );
+  }
+
+  static Color _foregroundColor(Set<WidgetState> states) {
+    if (states.contains(WidgetState.pressed) || states.contains(WidgetState.disabled)) {
       return Colors.white;
     } else {
       return AppColors.midnightBlue;
     }
   }
 
-  static OutlinedBorder _shape(Set<MaterialState> states) {
-    if (states.contains(MaterialState.pressed) || states.contains(MaterialState.disabled)) {
+  static OutlinedBorder _shape(Set<WidgetState> states) {
+    if (states.contains(WidgetState.pressed) || states.contains(WidgetState.disabled)) {
       return RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8),
         side: const BorderSide(color: AppColors.midnightBlue),
@@ -47,22 +57,22 @@ class AtomButtonStyle {
     }
   }
 
-  static Color _backgroundColorWeb(Set<MaterialState> states) {
-    if (states.contains(MaterialState.pressed)) {
+  static Color _backgroundColorWeb(Set<WidgetState> states) {
+    if (states.contains(WidgetState.pressed)) {
       return AppColors.midnightBlue;
-    } else if (states.contains(MaterialState.disabled)) {
+    } else if (states.contains(WidgetState.disabled)) {
       return AppColors.orange;
-    } else if (states.contains(MaterialState.hovered)) {
+    } else if (states.contains(WidgetState.hovered)) {
       return Colors.black12;
     } else {
       return Colors.white;
     }
   }
 
-  static Color _backgroundColorMobile(Set<MaterialState> states) {
-    if (states.contains(MaterialState.pressed) || states.contains(MaterialState.disabled)) {
+  static Color _backgroundColorMobile(Set<WidgetState> states) {
+    if (states.contains(WidgetState.pressed) || states.contains(WidgetState.disabled)) {
       return AppColors.midnightBlue;
-    } else if (states.contains(MaterialState.hovered)) {
+    } else if (states.contains(WidgetState.hovered)) {
       return Colors.black12;
     } else {
       return Colors.white;
