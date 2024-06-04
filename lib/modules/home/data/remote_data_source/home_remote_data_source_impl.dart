@@ -22,9 +22,6 @@ class HomeRemoteDataSourceImpl implements IHomeRemoteDataSource {
             {'name': 'Mercadinho Maristela', 'cnpj': '05.892.738/0001-24'},
           );
         } else {
-            return StoreDataModel.fromJson(
-            {'name': 'Mercadinho Maristela', 'cnpj': '05.892.738/0001-24'},
-          );
           throw SimulationTimeOutException();
         }
       },
