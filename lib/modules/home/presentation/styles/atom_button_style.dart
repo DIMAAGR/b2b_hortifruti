@@ -35,6 +35,15 @@ class AtomButtonStyle {
     );
   }
 
+  static ButtonStyle getOutlinedButtonStyle() {
+    return const ButtonStyle(
+      side: WidgetStatePropertyAll(BorderSide(color: Colors.white, width: 1)),
+      elevation: WidgetStatePropertyAll<double>(0),
+      splashFactory: NoSplash.splashFactory,
+      animationDuration: Duration.zero,
+    );
+  }
+
   static Color _foregroundColor(Set<WidgetState> states) {
     if (states.contains(WidgetState.pressed) || states.contains(WidgetState.disabled)) {
       return Colors.white;
@@ -52,7 +61,7 @@ class AtomButtonStyle {
     } else {
       return RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8),
-        side: const BorderSide(color: AppColors.grey),
+        side: const BorderSide(color: AppColors.grey1),
       );
     }
   }
