@@ -1,17 +1,23 @@
 import 'dart:math';
 
-import 'package:b2b_hortifruti/core/remote_data/exceptions/simulation_time_out_exception.dart';
+import 'package:b2b_hortifruti/core/remote_data/api/endpoints.dart';
+import 'package:b2b_hortifruti/core/remote_data/exceptions/time_out_exception.dart';
+import 'package:b2b_hortifruti/modules/home/data/models/market_data_model.dart';
 import 'package:b2b_hortifruti/modules/home/data/models/store_data_model.dart';
 import 'package:b2b_hortifruti/modules/home/data/remote_data_source/home_remote_data_source.dart';
 
 class HomeRemoteDataSourceImpl implements IHomeRemoteDataSource {
+  final Endpoints _endpoints;
+
+  const HomeRemoteDataSourceImpl(this._endpoints);
+
   // SIMULAÇÃO
   @override
   Future<StoreDataModel> fetchStoreData() {
     return Future.delayed(
       const Duration(seconds: 3),
       () async {
-        int random = Random.secure().nextInt(3) + 1;
+        int random = Random.secure().nextInt(2) + 1;
 
         if (random == 1) {
           return StoreDataModel.fromJson(
@@ -26,5 +32,10 @@ class HomeRemoteDataSourceImpl implements IHomeRemoteDataSource {
         }
       },
     );
+  }
+
+  @override
+  Future<MarketDataModel> fetchMarketData([Map<String, dynamic>? params]) async {
+    return MarketDataModel.fromJson((await _endpoints.searchProducts(params)));
   }
 }

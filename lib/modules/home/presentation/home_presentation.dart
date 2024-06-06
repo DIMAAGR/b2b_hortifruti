@@ -1,47 +1,31 @@
 import 'package:b2b_hortifruti/modules/home/presentation/controller/home_controller.dart';
-import 'package:b2b_hortifruti/modules/home/presentation/services/responsive_service.dart';
 import 'package:b2b_hortifruti/modules/home/presentation/widgets/organisms/organism_body.dart';
 import 'package:b2b_hortifruti/modules/home/presentation/widgets/organisms/organism_header.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 import '../domain/entities/store_data_entity.dart';
 
-class HomePresentation extends StatelessWidget {
+class HomePresentation extends StatefulWidget {
   final HomeController controller;
-  const HomePresentation({super.key, required this.controller});
+  final String? search;
+  const HomePresentation({super.key, required this.controller, this.search});
 
   @override
-  Widget build(BuildContext context) {
-    return ResponsiveService.isMobile(context)
-        ? _HomeMobilePresentation(controller)
-        : _HomeMobilePresentation(controller);
-  }
+  State<HomePresentation> createState() => _HomePresentationState();
 }
 
-class _HomeWebPresentation extends StatelessWidget {
-  final HomeController controller;
-  const _HomeWebPresentation(this.controller);
-
-  @override
-  Widget build(BuildContext context) {
-    return const Scaffold();
-  }
-}
-
-class _HomeMobilePresentation extends StatefulWidget {
-  final HomeController controller;
-  const _HomeMobilePresentation(this.controller);
-
-  @override
-  State<_HomeMobilePresentation> createState() => _HomeMobilePresentationState();
-}
-
-class _HomeMobilePresentationState extends State<_HomeMobilePresentation> {
+class _HomePresentationState extends State<HomePresentation> {
   @override
   void initState() {
     super.initState();
+    if (widget.controller.userData.value == null) {
+      widget.controller.getUserStoreData();
+    }
 
-    widget.controller.getStoreData();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      widget.controller.getMarketData(widget.search);
+    });
   }
 
   @override
@@ -50,11 +34,17 @@ class _HomeMobilePresentationState extends State<_HomeMobilePresentation> {
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(144),
         child: ListenableBuilder(
-            listenable: Listenable.merge([widget.controller.category, widget.controller.storeData]),
+            listenable: Listenable.merge([widget.controller.category, widget.controller.userData]),
             builder: (context, _) {
-              StoreDataEntity? storeEntity = widget.controller.storeData.value?.data;
+              StoreDataEntity? storeEntity = widget.controller.userData.value?.data;
 
               return OrganismHeader(
+                onFieldSubmitted: (text) {
+                  if (text != '') {
+                    String searcherData = '?search=${Uri.encodeComponent(text!)}';
+                    Modular.to.pushNamed('${Modular.initialRoute}$searcherData');
+                  }
+                },
                 actualCategory: widget.controller.category.value,
                 storeName: storeEntity?.storeName,
                 cnpjValue: storeEntity?.cnpj,
@@ -64,12 +54,14 @@ class _HomeMobilePresentationState extends State<_HomeMobilePresentation> {
               );
             }),
       ),
-      body: const SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [ OrganismBody()],
-        ),
+      body: SingleChildScrollView(
+        child: ValueListenableBuilder(
+            valueListenable: widget.controller.marketData,
+            builder: (context, marketData, _) {
+              return OrganismBody(
+                marketData: marketData?.data,
+              );
+            }),
       ),
     );
   }
