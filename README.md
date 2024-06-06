@@ -29,3 +29,15 @@
  ### Arquitetura
 
  Utilizei a arquitetura limpa do tio bob, foi bem corrido pra desenvolver mas tentei fazer o mais proximo do que foi proposto por ele, já que não tinha muito tempo pra pensar em uma arquitetura melhor.
+
+ Se você observar, vai verificar que algumas coisas como extensions, services, alguns styles estão dentro do modulo, estão no presentation porque todos estão ali para o funcionamento correto dela, e elas não estão fora do módulo porque elas não são usadas por outros módulos, estes itens são desse modulo, feito para ele e não para outro.
+
+ ## COMPONENTES
+
+ ### Searcher
+
+ Sim, o searcher funciona, talvez não da forma que eu queria, mas ele está funcionando e colocando a pesquisa em cima, no cabeçalho do navegador, queria colocar também pra continuar mostrando o que você pesquisou e quando clicar na logo ele retornar para o padrão, mas não tinha muito tempo pra isso... ;(
+
+### Lista de Produtos
+
+Pra não travar tanto eu fiz com que a lista só mostrasse os primeiros 16 itens e conforme vai chegando no final da lista fosse adicionando mais 16 até chegar no fim dela, também coloquei loading nela.
