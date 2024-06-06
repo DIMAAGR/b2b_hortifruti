@@ -7,6 +7,7 @@ import '../atom/atom_yandeh_logo.dart';
 
 class MoleculeHeader extends StatelessWidget {
   final VoidCallback onPressed;
+  final Function(String?) onFieldSubmitted;
   final VoidCallback onCartPressed;
   final String? storeName;
   final String? cnpjValue;
@@ -16,6 +17,7 @@ class MoleculeHeader extends StatelessWidget {
     required this.onCartPressed,
     this.storeName,
     this.cnpjValue,
+    required this.onFieldSubmitted,
   });
 
   @override
@@ -26,7 +28,7 @@ class MoleculeHeader extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           AtomYandehLogo.colorful(),
-          const AtomSearchTextFormField(),
+          AtomSearchTextFormField(onFieldSubmitted: onFieldSubmitted),
           AtomUserMenu(onPressed: onPressed, cnpjValue: cnpjValue, storeName: storeName),
           const SizedBox(width: 16),
           AtomCartButton(onPressed: onCartPressed),

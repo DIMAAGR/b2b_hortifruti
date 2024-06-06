@@ -10,6 +10,7 @@ class OrganismHeader extends StatelessWidget {
   final String? storeName;
   final String? cnpjValue;
   final Function(CategoryEnum) onCategoryPressed;
+  final Function(String?) onFieldSubmitted;
   final CategoryEnum actualCategory;
 
   const OrganismHeader({
@@ -17,7 +18,7 @@ class OrganismHeader extends StatelessWidget {
     this.storeName,
     this.cnpjValue,
     required this.onCategoryPressed,
-    required this.actualCategory,
+    required this.actualCategory, required this.onFieldSubmitted,
   });
 
   @override
@@ -29,7 +30,8 @@ class OrganismHeader extends StatelessWidget {
       shadowColor: Colors.black26,
       centerTitle: true,
       elevation: 5,
-      
+      leading: SizedBox(),
+    leadingWidth: 0,
       bottom: PreferredSize(
         preferredSize: Size(MediaQuery.of(context).size.width, 56),
         child: MoleculeCategoryList(
@@ -43,6 +45,7 @@ class OrganismHeader extends StatelessWidget {
               cnpjValue: cnpjValue,
             )
           : MoleculeHeader(
+            onFieldSubmitted: onFieldSubmitted,
               onPressed: () {},
               onCartPressed: () {},
               cnpjValue: cnpjValue,
