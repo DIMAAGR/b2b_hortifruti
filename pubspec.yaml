@@ -21,6 +21,8 @@ dependencies:
   flutter_svg: ^2.0.10+1
   video_player: ^2.8.6
   video_player_web: ^2.3.1
+  dio: ^5.4.3+1
+  flutter_dotenv: ^5.1.0
 
 dev_dependencies:
   flutter_test:
@@ -35,6 +37,7 @@ flutter:
     - assets/images/svg/
     - assets/videos/
     - assets/images/png/
+    - .env
 
   fonts:
     - family: sf-pro
