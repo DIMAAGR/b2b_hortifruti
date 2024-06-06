@@ -1,4 +1,5 @@
-import 'package:b2b_hortifruti/shared/presentation/theme/colors.dart';
+import 'package:b2b_hortifruti/modules/home/presentation/services/responsive_service.dart';
+import 'package:b2b_hortifruti/modules/home/presentation/styles/atom_shadow_style.dart';
 import 'package:b2b_hortifruti/shared/presentation/theme/text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
@@ -23,25 +24,22 @@ class AtomCategoryHeaderButton extends StatelessWidget {
     return visible
         ? InkWell(
             child: Container(
-              height: 112,
-              width: 256,
+              height: ResponsiveService.isMobile(context) ? 96 : 112,
+              width: ResponsiveService.isMobile(context) ? 224 : 256,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(16),
                 color: color,
-                boxShadow: const [
-                  BoxShadow(
-                    blurRadius: 8,
-                    offset: Offset(0, 4),
-                    color: AppColors.shadow3,
-                  ),
-                ],
+                boxShadow: AtomShadowStyle.categoryHeaderButton,
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Padding(
                     padding: const EdgeInsets.only(left: 16.0),
-                    child: Text(title, style: AppTextStyle.categoryHeaderButton),
+                    child: Text(title,
+                        style: AppTextStyle.categoryHeaderButton.copyWith(
+                          fontSize: ResponsiveService.isMobile(context) ? 18 : 20,
+                        )),
                   ),
                   ClipRRect(
                       borderRadius: const BorderRadius.only(
@@ -61,8 +59,8 @@ class AtomCategoryHeaderButton extends StatelessWidget {
               borderRadius: BorderRadius.circular(16),
             ),
             child: Shimmer.fromColors(
-              baseColor: Colors.black12,
-              highlightColor: Colors.white70,
+              baseColor: Colors.grey.shade300,
+              highlightColor: Colors.grey.shade100,
               child: Container(
                 height: 112,
                 width: 256,
