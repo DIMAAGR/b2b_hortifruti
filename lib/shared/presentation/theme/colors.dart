@@ -6,7 +6,8 @@ class AppColors {
 
   static const Color midnightBlue = Color(0xFF04283B);
 
-  static const Color grey = Color(0xFF79747E);
+  static const Color grey1 = Color(0xFF79747E);
+  static const Color grey2 = Color(0xFF767B7D);
   static const Color darkGrey = Color(0xFF464A4C);
   static const Color shadowGrey = Color(0xFF322F35);
 
@@ -24,4 +25,6 @@ class AppColors {
   static const Color darkForestGreen = Color(0xFF164612);
   static const Color mossGreen = Color(0xFF185313);
   static const Color brightRed = Color(0xFFED1C24);
+  static const Color jadeite = Color(0xFF35A88F);
+  static const Color babyBlue = Color(0xFFE5F6FF);
 }
