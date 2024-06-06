@@ -2,6 +2,7 @@ import 'package:b2b_hortifruti/modules/home/presentation/services/responsive_ser
 import 'package:b2b_hortifruti/modules/home/presentation/widgets/atom/atom_banner_title.dart';
 import 'package:flutter/material.dart';
 
+import '../atom/atom_banner_button.dart';
 import '../atom/atom_banner_subtitle.dart';
 import '../atom/atom_category_header.dart';
 
@@ -27,7 +28,7 @@ class MoleculeFavoritesBanner extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 32.0),
-      height: 296,
+      height: ResponsiveService.isMobile(context) ? 200 : 296,
       child: AtomCategoryHeader(
         backgroundColor: backgroundColor,
         videoAsset: videoAsset,
@@ -38,6 +39,7 @@ class MoleculeFavoritesBanner extends StatelessWidget {
           children: [
             AtomBannerTitle(title: title, color: backgroundTitleColor),
             AtomBannerSubtitle(subtitle: subtitle),
+            AtomBannerButton(onPressed: onSeeMorePressed)
           ],
         ),
       ),

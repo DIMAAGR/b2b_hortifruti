@@ -2,6 +2,7 @@ import 'package:b2b_hortifruti/modules/home/presentation/services/responsive_ser
 import 'package:b2b_hortifruti/modules/home/presentation/widgets/atom/atom_category_header.dart';
 import 'package:b2b_hortifruti/modules/home/presentation/widgets/atom/atom_yandeh_logo.dart';
 import 'package:b2b_hortifruti/shared/presentation/consts/videos.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
@@ -46,44 +47,47 @@ class MoleculeCategoryBanner extends StatelessWidget {
               ],
             ),
           ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: SizedBox(
-              width: MediaQuery.of(context).size.width - 64,
-              height: 112,
-              child: Center(
-                child: ScrollConfiguration(
-                  behavior: behavior,
-                  child: SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        if (ResponsiveService.isMobile(context)) const SizedBox(width: 32),
-                        AtomCategoryHeaderButton(
-                          title: 'Legumes',
-                          asset: 'assets/images/png/vegetables.png',
-                          color: AppColors.darkEmerald,
-                          onPressed: () {},
-                          visible: isCategoriesVisible,
-                        ),
-                        const SizedBox(width: 32),
-                        AtomCategoryHeaderButton(
-                          title: 'Frutas',
-                          asset: 'assets/images/png/fuits.png',
-                          color: AppColors.limeGreen,
-                          onPressed: () {},
-                          visible: isCategoriesVisible,
-                        ),
-                        const SizedBox(width: 32),
-                        AtomCategoryHeaderButton(
-                          title: 'Temperos',
-                          asset: 'assets/images/png/spice.png',
-                          color: AppColors.peachPink,
-                          onPressed: () {},
-                          visible: isCategoriesVisible,
-                        ),
-                      ],
+          Padding(
+            padding: const EdgeInsets.only(bottom: kIsWeb ? 8.0 : 16.0),
+            child: Align(
+              alignment: Alignment.bottomCenter,
+              child: SizedBox(
+                width: MediaQuery.of(context).size.width - 64,
+                height: 112,
+                child: Center(
+                  child: ScrollConfiguration(
+                    behavior: behavior,
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          if (ResponsiveService.isMobile(context)) const SizedBox(width: 32),
+                          AtomCategoryHeaderButton(
+                            title: 'Legumes',
+                            asset: 'assets/images/png/vegetables.png',
+                            color: AppColors.darkEmerald,
+                            onPressed: () {},
+                            visible: isCategoriesVisible,
+                          ),
+                          const SizedBox(width: 32),
+                          AtomCategoryHeaderButton(
+                            title: 'Frutas',
+                            asset: 'assets/images/png/fuits.png',
+                            color: AppColors.limeGreen,
+                            onPressed: () {},
+                            visible: isCategoriesVisible,
+                          ),
+                          const SizedBox(width: 32),
+                          AtomCategoryHeaderButton(
+                            title: 'Temperos',
+                            asset: 'assets/images/png/spice.png',
+                            color: AppColors.peachPink,
+                            onPressed: () {},
+                            visible: isCategoriesVisible,
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
