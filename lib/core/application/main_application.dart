@@ -8,6 +8,8 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       routerConfig: Modular.routerConfig,
+      title: 'B2B Hortifruti - Yandeh',
+      theme: ThemeData(scaffoldBackgroundColor: Colors.white),
     );
   }
 }
